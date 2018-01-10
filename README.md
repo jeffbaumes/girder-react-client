@@ -1,5 +1,8 @@
 # girder-react-client
 
+[![build-status](https://circleci.com/gh/jeffbaumes/girder-react-client.svg?style=shield)](https://circleci.com/gh/jeffbaumes/girder-react-client)
+[![codecov](https://codecov.io/gh/jeffbaumes/girder-react-client/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffbaumes/girder-react-client/branch/master)
+
 A proof-of-concept web UI for Girder built with
 `react`, `redux`, `react-router`, `semantic-ui-react`.
 
