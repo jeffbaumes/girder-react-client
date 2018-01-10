@@ -1,0 +1,21 @@
+.ResourceItem-segment {
+  display: flex;
+}
+
+.ResourceItem-segment div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ResourceItem-header {
+  flex: 1;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.ResourceItem-detail {
+  flex: 0 0 200px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
