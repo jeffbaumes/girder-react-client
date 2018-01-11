@@ -45,17 +45,6 @@ export default (state = initialState, action) => {
         ...state,
         children: [...state.children, action.resource],
       };
-    case MORE_CHILDREN_REQUESTED:
-      return {
-        ...state,
-        isLoadingChildren: true,
-      };
-    case MORE_CHILDREN:
-      return {
-        ...state,
-        children: [...state.children, ...action.children],
-        isLoadingChildren: false,
-      };
     default:
       return state
   }
@@ -96,5 +85,3 @@ export const createChild = (type, options) => {
     });
   };
 };
-
-export const loadMore = () => { throw new Error('Not implemented'); }
