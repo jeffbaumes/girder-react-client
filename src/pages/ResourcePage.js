@@ -26,10 +26,10 @@ class ResourcePage extends Component {
       type,
       description,
       icon,
-      breadcrumbs,
-      childrenHeading,
-      children,
-      childActions,
+      breadcrumbs = [],
+      childrenHeading = 'Content',
+      children = [],
+      childActions = [],
       match: { params: { id } },
     } = this.props;
 

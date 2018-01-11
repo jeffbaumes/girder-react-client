@@ -5,11 +5,6 @@ import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
 import NewResourceContainer from '../containers/NewResourceContainer';
 
-let URLSearchParams = window.URLSearchParams
-if (!URLSearchParams) {
-  URLSearchParams = require('url').URLSearchParams;
-}
-
 export const type = 'collection';
 export const name = 'Collection';
 export const icon = 'sitemap';

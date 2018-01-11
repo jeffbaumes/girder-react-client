@@ -1,8 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { mount } from 'enzyme';
-import { MemoryRouter as Router } from 'react-router-dom';
-import { createMockStore } from 'redux-test-utils';
+import mockStore from '../test/mockStore';
+import mountWithRouterAndStore from '../test/mountWithRouterAndStore';
 import NavigationMenuContainer from './NavigationMenuContainer';
 import NavigationMenu from '../components/NavigationMenu';
 
@@ -12,12 +10,8 @@ const menuItems = [
   {id: 'c', name: 'for admins only', requiresAdmin: true},
 ];
 
-const mountWithRouterAndStore = (component, store) => {
-  return mount(<Provider store={store}><Router>{component}</Router></Provider>);
-};
-
 it('converts state to props correctly with no user', () => {
-  const store = createMockStore({
+  const store = mockStore({
     user: {id: null},
     main: {menuItems},
   });
@@ -29,7 +23,7 @@ it('converts state to props correctly with no user', () => {
 });
 
 it('converts state to props correctly with non-admin user', () => {
-  const store = createMockStore({
+  const store = mockStore({
     user: {id: 'joe'},
     main: {menuItems},
   });
@@ -41,7 +35,7 @@ it('converts state to props correctly with non-admin user', () => {
 });
 
 it('converts state to props correctly with admin user', () => {
-  const store = createMockStore({
+  const store = mockStore({
     user: {id: 'admin', admin: true},
     main: {menuItems},
   });

@@ -7,28 +7,6 @@ export const ADD_CHILD = 'focusedResource/ADD_CHILD';
 export const MORE_CHILDREN_REQUESTED = 'focusedResource/MORE_CHILDREN_REQUESTED';
 export const MORE_CHILDREN = 'focusedResource/MORE_CHILDREN';
 
-// All resource objects in the redux state are formatted as follows:
-// {
-//   type: 'user',
-//   name: 'John Doe',
-//   description: 'johndoe',
-//   id: '8540056599af9437d03943743',
-// }
-
-// Resource parents (i.e. Collections, Users, etc.) are identical but have null id:
-// {
-//   type: 'user',
-//   name: 'Users',
-//   description: null,
-//   id: null,
-// }
-
-// Every resource type has the following functions that return a Promise:
-// fetchOne({ id: String }): Promise<Resource>
-// fetchMany({ limit: Integer, query: String, sort: String, sortDir: Integer }): Promise<Resource>
-// fetchResourcePath({ id: String }): Promise<List<Resource> >
-// fetchChildren({ id: String, limit: Integer, query: String, sort: String, sortDir: Integer }): Promise<List<Resource> >
-
 const nullResource = {
   id: null,
   name: '',

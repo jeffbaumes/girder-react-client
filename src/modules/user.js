@@ -77,18 +77,14 @@ export default (state = initialState, action) => {
 };
 
 export const openLoginModal = () => {
-  return dispatch => {
-    dispatch({
-      type: OPEN_LOGIN_MODAL
-    });
+  return {
+    type: OPEN_LOGIN_MODAL
   };
 };
 
 export const closeLoginModal = () => {
-  return dispatch => {
-    dispatch({
-      type: CLOSE_LOGIN_MODAL
-    });
+  return {
+    type: CLOSE_LOGIN_MODAL
   };
 };
 
@@ -156,7 +152,7 @@ export const logout = () => {
       type: LOGOUT_REQUESTED
     });
 
-    axios.delete('/user/authentication').then(result => {
+    return axios.delete('/user/authentication').then(result => {
       dispatch({
         type: LOGOUT
       });

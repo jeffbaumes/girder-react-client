@@ -15,24 +15,20 @@ export default (state = initialState, action) => {
     case CLOSE_MODAL:
       return initialState;
     default:
-      return state
+      return state;
   }
 };
 
 export const openModal = modalName => {
-  return dispatch => {
-    dispatch({
-      type: OPEN_MODAL,
-      modalName
-    });
+  return {
+    type: OPEN_MODAL,
+    modalName,
   };
 };
 
 export const closeModal = () => {
-  return dispatch => {
-    dispatch({
-      type: CLOSE_MODAL,
-    });
+  return {
+    type: CLOSE_MODAL,
   };
 };
 

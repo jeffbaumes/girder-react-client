@@ -13,14 +13,14 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => (
   {
     onOpen: () => {
-      dispatch(openModal(`new-${ownProps.type}`));
+      return dispatch(openModal(`new-${ownProps.type}`));
     },
     onClose: () => {
-      dispatch(closeModal());
+      return dispatch(closeModal());
     },
     create: options => {
-      dispatch(createChild(ownProps.type, options)).then(() => {
-        dispatch(closeModal());
+      return dispatch(createChild(ownProps.type, options)).then(() => {
+        return dispatch(closeModal());
       });
     }
   }

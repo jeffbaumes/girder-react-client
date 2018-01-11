@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => (
   {
     fetch: () => {
-      dispatch(setResourceFocus(ownProps.type, ownProps.match.params.id, ownProps.match.params.query));
+      return dispatch(setResourceFocus(ownProps.type, ownProps.match.params.id, ownProps.match.params.query));
     },
   }
 );

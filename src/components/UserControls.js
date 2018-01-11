@@ -4,7 +4,11 @@ import { Button, Form, Menu, Message, Modal } from 'semantic-ui-react';
 
 class UserControls extends Component {
   componentDidMount = () => {
-    this.props.fetchLoginStatus();
+    this.props.fetchLoginStatus().then(() => {
+      if (this.props.onInitialized) {
+        this.props.onInitialized();
+      }
+    });
   }
 
   state = {

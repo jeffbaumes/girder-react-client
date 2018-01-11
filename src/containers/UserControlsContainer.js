@@ -13,19 +13,19 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchLoginStatus: () => {
-      dispatch(checkLogin());
+      return dispatch(checkLogin());
     },
     onLogout: () => {
-      dispatch(logout());
+      return dispatch(logout());
     },
     onLogin: (username, password) => {
-      dispatch(login(username, password));
+      return dispatch(login(username, password));
     },
     onOpenLoginModal: () => {
-      dispatch(openLoginModal());
+      return dispatch(openLoginModal());
     },
     onCloseLoginModal: () => {
-      dispatch(closeLoginModal());
+      return dispatch(closeLoginModal());
     },
   };
 };
