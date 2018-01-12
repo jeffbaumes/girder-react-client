@@ -94,14 +94,14 @@ npm i babel-preset-es2015 babel-preset-stage-0 babel-preset-react babel-cli
 ```
 
 Create `.babelrc`
-```json
+```
 {
   "presets": ["es2015", "react", "stage-0"]
 }
 ```
 
 Change `package.json`
-```json
+```
 {
   ...
   "main": "lib/index.js",
@@ -169,7 +169,7 @@ registerServiceWorker();
 ```
 
 Add the proxy to Girder for the dev server to your `package.json`
-```json
+```
 {
   ...
   "proxy": {
