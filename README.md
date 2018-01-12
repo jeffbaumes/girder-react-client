@@ -6,6 +6,22 @@
 A proof-of-concept web UI for Girder built with
 `react`, `redux`, `react-router`, `semantic-ui-react`.
 
+## How to build, test, etc.
+
+Before anything else, do `npm install`.
+
+Run the client in watch mode with `npm start`.
+The development server is set up to proxy all requests under `/api/v1` to `http://localhost:8080`,
+and assumes a Girder server is running there.
+
+Run the tests in watch mode with `npm test`. Report coverage with `npm test -- --coverage`.
+
+Build production code to `/build` with `npm run build`.
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+You can find information on how to perform common tasks
+[here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
 ## Why?
 
 [@jeffbaumes](https://github.com/jeffbaumes) wanted to learn React and decided to use
@@ -64,24 +80,11 @@ I also like the simplicity and compactness of the
 [ducks](https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c)
 model for Redux, which I've put in `/src/modules`.
 
-## How to build, test, etc.
-
-Before anything else, do `npm install`.
-
-Run the client in watch mode with `npm start`.
-The development server is set up to proxy all requests under `/api/v1` to `http://localhost:8080`,
-and assumes a Girder server is running there.
-
-Run the tests in watch mode with `npm test`. Report coverage with `npm test -- --coverage`.
-
-Build production code to `/build` with `npm run build`.
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
 ## What was done to make it a library
 
 Girder is somewhat unique in that it is both an application and a library.
-Out of the box, `create-react-app` is not for [library creation](https://github.com/facebookincubator/create-react-app/issues/907#issuecomment-253998607),
+Out of the box, `create-react-app` is not for
+[library creation](https://github.com/facebookincubator/create-react-app/issues/907#issuecomment-253998607),
 but the comment thread links to an interesting
 [article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354)
 explaining how it could be done.
@@ -113,7 +116,7 @@ Change `package.json`
 }
 ```
 
-Export app fron `src/index.js`
+Export app from `src/index.js`
 ```jsx
 // ... imports
 
