@@ -6,8 +6,7 @@ import { setResourceFocus } from '../modules/focusedResource';
 const mapStateToProps = state => {
   const { resource, rootPath, children } = state.focusedResource;
   return {
-    name: resource.name,
-    description: resource.description,
+    resource: resource,
     breadcrumbs: rootPath,
     children,
   }

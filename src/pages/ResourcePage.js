@@ -22,16 +22,18 @@ class ResourcePage extends Component {
 
   render() {
     const {
-      name,
-      type,
-      description,
-      icon,
+      resource,
       breadcrumbs = [],
-      childrenHeading = 'Content',
       children = [],
-      actions = [],
-      match: { params: { id } },
     } = this.props;
+
+    if (!resource || !resource.id || !resources[resource.type]) {
+      return null;
+    }
+
+    const icon = resources[resource.type].icon;
+    const childrenHeading = resources[resource.type].childrenHeading || 'Contents';
+    const actions = resources[resource.type].actions || [];
 
     return (
       <Container>
@@ -57,21 +59,21 @@ class ResourcePage extends Component {
           <Header>
             <Icon name={icon} />
             <Header.Content>
-              {name}
+              {resource.name}
               <Header.Subheader>
-                {description}
+                {resource.description}
               </Header.Subheader>
             </Header.Content>
           </Header>
           <Divider horizontal>{childrenHeading}</Divider>
           {
-            actions.map(action => {
+            actions.filter(action => !action.condition || action.condition(resource)).map(action => {
               let ActionComponent = action.component;
               if (typeof ActionComponent === 'string') {
                 const [type, field] = ActionComponent.split('.');
                 ActionComponent = resources[type][field];
               }
-              return <ActionComponent id={id} type={type} key={action.key} />;
+              return <ActionComponent resource={resource} key={action.key} />;
             })
           }
           <Segment.Group>

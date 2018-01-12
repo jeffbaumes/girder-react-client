@@ -34,8 +34,7 @@ it('sets correct props', () => {
   const comp = mountWithRouterAndStore(<ResourcePageContainer type='item' />, store);
   const props = comp.find(ResourcePage).props();
   expect(props).toMatchObject({
-    name: 'n',
-    description: 'd',
+    resource: storeContent.focusedResource.resource,
     breadcrumbs: storeContent.focusedResource.rootPath,
     children: storeContent.focusedResource.children,
   });
