@@ -29,7 +29,7 @@ class ResourcePage extends Component {
       breadcrumbs = [],
       childrenHeading = 'Content',
       children = [],
-      childActions = [],
+      actions = [],
       match: { params: { id } },
     } = this.props;
 
@@ -65,13 +65,13 @@ class ResourcePage extends Component {
           </Header>
           <Divider horizontal>{childrenHeading}</Divider>
           {
-            childActions.map(action => {
+            actions.map(action => {
               let ActionComponent = action.component;
               if (typeof ActionComponent === 'string') {
                 const [type, field] = ActionComponent.split('.');
                 ActionComponent = resources[type][field];
               }
-              return <ActionComponent parentId={id} parentType={type} key={action.key} />;
+              return <ActionComponent id={id} type={type} key={action.key} />;
             })
           }
           <Segment.Group>

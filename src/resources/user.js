@@ -63,7 +63,7 @@ export const item = ({ resource }) => (
   />
 );
 
-export const childActions = [
+export const actions = [
   {
     key: 'new-folder',
     component: 'folder.createAction',

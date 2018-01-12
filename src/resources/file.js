@@ -57,11 +57,11 @@ export const item = ({ resource }) => (
   />
 );
 
-export const childActions = [
+export const actions = [
   {
     key: 'download-file',
-    component: ({ parentId }) => (
-      <Button as='a' href={`/api/v1/file/${parentId}/download`} content='Download' />
+    component: ({ id }) => (
+      <Button as='a' href={`/api/v1/file/${id}/download`} content='Download' />
     ),
   },
 ];

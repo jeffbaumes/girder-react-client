@@ -67,14 +67,14 @@ export const item = ({ resource }) => (
 
 export const createAction = bindProps(NewResourceContainer, {type, name, icon});
 
-export const rootChildActions = [
+export const rootActions = [
   {
     key: 'new-group',
     component: 'group.createAction',
   },
 ];
 
-export const childActions = [
+export const actions = [
   {
     key: 'new-group-member',
     component: 'groupMember.createAction',

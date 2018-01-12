@@ -56,7 +56,7 @@ export const createAction = bindProps(NewResourceContainer, {
   icon,
   onSubmit: (state, props) => {
     const { name = '', description = '' } = state;
-    const { parentId } = props;
+    const { id: parentId } = props;
     props.create({folderId: parentId, name, description});
   },
 });

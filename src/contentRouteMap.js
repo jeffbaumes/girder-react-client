@@ -9,13 +9,13 @@ const resourceRoutes = Object.assign({}, ...Object.keys(resources).map(type => {
     type,
     icon: resource.icon,
     childrenHeading: resource.rootChildrenHeading,
-    childActions: resource.rootChildActions || [],
+    actions: resource.rootActions || [],
   });
   const singleResourceComponent = bindProps(ResourcePageContainer, {
     type,
     icon: resource.icon,
     childrenHeading: resource.childrenHeading,
-    childActions: resource.childActions || [],
+    actions: resource.actions || [],
   });
   return {
     [type]: {component: topLevelComponent},

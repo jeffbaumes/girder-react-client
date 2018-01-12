@@ -55,14 +55,14 @@ export const item = ({ resource }) => (
 
 export const createAction = bindProps(NewResourceContainer, {type, name, icon});
 
-export const rootChildActions = [
+export const rootActions = [
   {
     key: 'new-collection',
     component: 'collection.createAction',
   },
 ];
 
-export const childActions = [
+export const actions = [
   {
     key: 'new-folder',
     component: 'folder.createAction',
