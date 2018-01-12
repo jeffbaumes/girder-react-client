@@ -48,6 +48,10 @@ export const fetchChildren = ({ id }) => {
   return Promise.resolve([]);
 };
 
+export const fileContent = ({ id }) => {
+  return axios.get(`/file/${id}/download`).then(result => result.data);
+}
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/file/${resource.id}`}
