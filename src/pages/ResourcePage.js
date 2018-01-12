@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Container, Divider, Header, Icon, Segment } from 'semantic-ui-react';
 import AnyResourceItem from '../components/AnyResourceItem';
@@ -32,8 +32,15 @@ class ResourcePage extends Component {
     }
 
     const icon = resources[resource.type].icon;
-    const childrenHeading = resources[resource.type].childrenHeading || 'Contents';
-    const actions = resources[resource.type].actions || [];
+    let actions;
+    let childrenHeading;
+    if (resource.isRoot) {
+      actions = resources[resource.type].rootActions || [];
+      childrenHeading = resources[resource.type].rootChildrenHeading || 'Contents';
+    } else {
+      actions = resources[resource.type].actions || [];
+      childrenHeading = resources[resource.type].childrenHeading || 'Contents';
+    }
 
     return (
       <Container>
@@ -65,7 +72,6 @@ class ResourcePage extends Component {
               </Header.Subheader>
             </Header.Content>
           </Header>
-          <Divider horizontal>{childrenHeading}</Divider>
           {
             actions.filter(action => !action.condition || action.condition(resource)).map(action => {
               let ActionComponent = action.component;
@@ -76,13 +82,19 @@ class ResourcePage extends Component {
               return <ActionComponent resource={resource} key={action.key} />;
             })
           }
-          <Segment.Group>
-            {
-              children.map(resource => {
-                return <AnyResourceItem resource={resource} key={resource.id} />;
-              })
-            }
-          </Segment.Group>
+          {
+            children.length > 0 &&
+            <Fragment>
+              <Divider horizontal>{childrenHeading}</Divider>
+              <Segment.Group>
+                {
+                  children.map(resource => {
+                    return <AnyResourceItem resource={resource} key={resource.id} />;
+                  })
+                }
+              </Segment.Group>
+            </Fragment>
+          }
         </Segment>
       </Container>
     );

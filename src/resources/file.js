@@ -60,8 +60,8 @@ export const item = ({ resource }) => (
 export const actions = [
   {
     key: 'download-file',
-    component: ({ id }) => (
-      <Button as='a' href={`/api/v1/file/${id}/download`} content='Download' />
+    component: ({ resource }) => (
+      <Button as='a' href={`/api/v1/file/${resource.id}/download`} content='Download' />
     ),
   },
 ];

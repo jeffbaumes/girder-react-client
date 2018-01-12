@@ -8,6 +8,7 @@ export const rootModel = type => (
     description: '',
     _id: type,
     _modelType: type,
+    isRoot: true,
   }
 );
 

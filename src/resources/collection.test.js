@@ -14,11 +14,13 @@ it('resourceFromModel converts from model to resource', () => {
     _modelType: 'collection',
     name: 'c',
     description: 'd',
+    other: 'o',
   })).toEqual({
     id: 'a',
     type: 'collection',
     name: 'c',
     description: 'd',
+    other: 'o',
   });
 });
 
@@ -48,6 +50,7 @@ it('fetchResourcePath is a simple root model', done => {
         _modelType: 'collection',
         name: 'Collections',
         description: '',
+        isRoot: true,
       },
     ]);
     done();
