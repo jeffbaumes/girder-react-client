@@ -16,7 +16,9 @@ and assumes a Girder server is running there.
 
 Run the tests in watch mode with `npm test`. Report coverage with `npm test -- --coverage`.
 
-Build production code to `/build` with `npm run build`.
+Build production code (in `/build`) with `npm run build`.
+
+Build the library (in `/lib`) with `npm run lib`.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find information on how to perform common tasks
