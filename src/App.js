@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import MainMenu from './components/MainMenu';
 import NavigationMenuContainer from './containers/NavigationMenuContainer';
-import RoutedContentContainer from './containers/RoutedContentContainer';
+import RoutedContent from './components/RoutedContent';
 
 class App extends Component {
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
           <Route path='/:type/search/:query' exact component={NavigationMenuContainer} />
           <Route path='/' component={NavigationMenuContainer} />
         </Switch>
-        <RoutedContentContainer />
+        <RoutedContent />
       </div>
     );
   }

@@ -1,7 +1,8 @@
-import contentRouteMap from '../contentRouteMap';
-
+// On second thought, these are actually static (unless we are hot-swapping plugins)
+// so should probably not be part of the state.
+// They could be placed in their own menuItems file and be added to by a
+// addMenuItem plugin endpoint.
 const initialState = {
-  contentRoutes: Object.keys(contentRouteMap).map(id => ({ id })),
   menuItems: [
     { id: 'my-data', name: 'My Data', requiresLogin: true },
     { id: 'collection', name: 'Collections' },

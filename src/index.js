@@ -8,6 +8,10 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 import App from './App';
 
+export { default as addResourceAction } from './pluginEndpoints/addResourceAction';
+export { default as addRoutedContent } from './pluginEndpoints/addRoutedContent';
+export { default as resources } from './resources';
+
 axios.defaults.baseURL = '/api/v1';
 
 const GirderApp = () => (

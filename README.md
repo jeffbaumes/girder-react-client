@@ -185,3 +185,66 @@ Start your app
 ```
 npm start
 ```
+
+## Using plugin endpoints
+
+The following is an example addition (a table "viewer" that just dumps the content
+of a text file to the webpage) using prototype plugin endpoints
+on a repo that has a dependency on `girder-react-client` (like described in the
+previous section).
+
+`src/components/TableViewAction.js`
+```jsx
+import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
+class TableViewAction extends Component {
+  render() {
+    const { id } = this.props;
+    return <Button as={Link} to={`/file/${id}/table-view`} content='Table View' />;
+  }
+}
+
+export default TableViewAction;
+```
+
+`src/components/TableViewPage.js`
+```jsx
+import React, { Component } from 'react';
+import { resources } from 'girder-react-client';
+
+class TableViewPage extends Component {
+  state = {
+    content: '',
+  }
+
+  componentWillMount = () => {
+    resources.file.fileContent({id: this.props.match.params.id}).then(content => {
+      this.setState({content});
+    });
+  }
+
+  render = () => {
+    return <div>{this.state.content}</div>;
+  }
+};
+
+export default TableViewPage;
+```
+
+`src/index.js`
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import registerServiceWorker from './registerServiceWorker';
+import App, { addResourceAction, addRoutedContent } from 'girder-react-client';
+import TableViewAction from './components/TableViewAction';
+import TableViewPage from './components/TableViewPage';
+
+addResourceAction({type: 'file', key: 'table-view', component: TableViewAction});
+addRoutedContent({route: 'file/:id/table-view', component: TableViewPage});
+
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();
+```
