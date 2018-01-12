@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { rootModel } from './resource';
+import { rootModel, resourceFromModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
 
 export const type = 'user';
@@ -11,12 +11,9 @@ export const childrenHeading = 'Contents';
 
 export const fromModel = user => (
   {
-    id: user._id,
+    ...resourceFromModel(user),
     name: user.name || `${user.firstName} ${user.lastName}`,
     description: user.description || user.login,
-    type: 'user',
-    login: user.login,
-    accessLevel: user.accessLevel,
   }
 );
 

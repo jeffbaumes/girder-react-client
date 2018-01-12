@@ -10,11 +10,7 @@ export const icon = 'file';
 export const rootChildrenHeading = 'Files';
 export const childrenHeading = null;
 
-export const fromModel = model => {
-  const resource = resourceFromModel(model);
-  resource.size = model.size;
-  return resource;
-};
+export const fromModel = resourceFromModel;
 
 export const fetchOne = ({ id }) => {
   return axios.get(`/file/${id}`).then(result => {

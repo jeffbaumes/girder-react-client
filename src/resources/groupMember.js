@@ -4,17 +4,13 @@ import { Form } from 'semantic-ui-react';
 import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
 import NewResourceContainer from '../containers/NewResourceContainer';
+import { resourceFromModel } from './resource';
 
 export const fromModel = groupMember => (
   {
-    id: groupMember._id,
+    ...resourceFromModel(groupMember),
     name: groupMember.name || `${groupMember.firstName} ${groupMember.lastName}`,
     description: groupMember.description || groupMember.login,
-    type: 'groupMember',
-    memberType: groupMember.memberType,
-    login: groupMember.login,
-    acceptedInvite: groupMember.acceptedInvite,
-    accessLevel: groupMember.accessLevel,
   }
 );
 

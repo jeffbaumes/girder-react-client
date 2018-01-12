@@ -11,11 +11,11 @@ export const rootModel = type => (
   }
 );
 
-export const resourceFromModel = model => (
-  {
-    id: model._id,
-    name: model.name,
-    description: model.description,
-    type: model._modelType,
-  }
-);
+export const resourceFromModel = model => {
+  const {_id, _modelType, ...properties} = model;
+  return {
+    ...properties,
+    id: _id,
+    type: _modelType,
+  };
+};
