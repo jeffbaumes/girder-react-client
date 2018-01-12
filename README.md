@@ -77,3 +77,111 @@ Run the tests in watch mode with `npm test`. Report coverage with `npm test -- -
 Build production code to `/build` with `npm run build`.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## What was done to make it a library
+
+Girder is somewhat unique in that it is both an application and a library.
+Out of the box, `create-react-app` is not for [library creation](https://github.com/facebookincubator/create-react-app/issues/907#issuecomment-253998607),
+but the comment thread links to an interesting
+[article](https://medium.com/@lokhmakov/best-way-to-create-npm-packages-with-create-react-app-b24dd449c354)
+explaining how it could be done.
+This was adapted for `npm` instead of `yarn`, and with a minimal set of steps to
+make it work without ejecting from `create-react-app`.
+
+Install Babel
+```
+npm i babel-preset-es2015 babel-preset-stage-0 babel-preset-react babel-cli
+```
+
+Create `.babelrc`
+```json
+{
+  "presets": ["es2015", "react", "stage-0"]
+}
+```
+
+Change `package.json`
+```json
+{
+  ...
+  "main": "lib/index.js",
+  ...
+  "scripts": {
+    ...
+    "lib": "babel src --out-dir lib --copy-files"
+  }
+}
+```
+
+Export app fron `src/index.js`
+```jsx
+// ... imports
+
+const GirderApp = () => (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+);
+
+ReactDOM.render(
+  <GirderApp />,
+  document.getElementById('root'));
+
+registerServiceWorker();
+
+export default GirderApp;
+```
+
+## Using `girder-react-client` as a library
+
+To use the library, create a new `create-react-app` that depends on Girder
+```bash
+create-react-app my-girder-app
+cd my-girder-app
+npm i git+https://github.com/jeffbaumes/girder-react-client
+
+# Note: it currently needs to be "npm link"ed to a local checkout because
+# the "/lib" dir with build artifacts is not in the git repo and the package
+# is not yet on npm. You can do this with the following steps:
+cd ..
+git clone https://github.com/jeffbaumes/girder-react-client
+cd girder-react-client
+npm i
+npm run lib
+npm link
+cd ../my-girder-app
+npm link girder-react-client
+```
+
+Use the exported Girder app object in `src/index.js`
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import registerServiceWorker from './registerServiceWorker';
+// import App from './App'; --- remove
+// import './index.css'; --- remove
+import App from 'girder-react-client'; // --- add
+
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();
+```
+
+Add the proxy to Girder for the dev server to your `package.json`
+```json
+{
+  ...
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080",
+      "ws": true
+    }
+  }
+}
+```
+
+Start your app
+```
+npm start
+```

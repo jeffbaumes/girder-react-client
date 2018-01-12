@@ -10,12 +10,18 @@ import App from './App';
 
 axios.defaults.baseURL = '/api/v1';
 
-ReactDOM.render(
+const GirderApp = () => (
   <Provider store={store}>
     <Router>
       <App />
     </Router>
-  </Provider>,
+  </Provider>
+);
+
+ReactDOM.render(
+  <GirderApp />,
   document.getElementById('root'));
 
 registerServiceWorker();
+
+export default GirderApp;
