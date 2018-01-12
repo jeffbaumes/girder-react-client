@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'semantic-ui-react';
 import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
 
@@ -26,11 +27,20 @@ export const fetchMany = (options = {}) => {
 };
 
 export const fetchResourcePath = ({ id }) => {
-  return axios.get(`/file/${id}/rootpath`).then(result => {
-    return [
-      rootModel(result.data[0].type),
-      ...result.data.map(item => item.object),
-    ];
+  // TOOD: We end up getting the file twice (fetchOne and fetchResourcePath)
+  // from setResourceFocus in modules/focusedResource.js.
+  // We should perhaps order the calls pass item id here to avoid this.
+  return axios.get(`/file/${id}`).then(fileResult => {
+    return Promise.all([
+      axios.get(`/item/${fileResult.data.itemId}/rootpath`),
+      axios.get(`/item/${fileResult.data.itemId}`),
+    ]).then(([pathResult, itemResult]) => {
+      return [
+        rootModel(pathResult.data[0].type),
+        ...pathResult.data.map(item => item.object),
+        itemResult.data,
+      ];
+    });
   });
 };
 
@@ -40,10 +50,18 @@ export const fetchChildren = ({ id }) => {
 
 export const item = ({ resource }) => (
   <ResourceItem
-    url={`/api/v1/file/${resource.id}/download`}
-    isRouteLink={false}
+    url={`/file/${resource.id}`}
     icon={icon}
     name={resource.name}
-    description={`${resource.size} bytes`}
+    description={resource.description}
   />
 );
+
+export const childActions = [
+  {
+    key: 'download-file',
+    component: ({ parentId }) => (
+      <Button as='a' href={`/api/v1/file/${parentId}/download`} content='Download' />
+    ),
+  },
+];
