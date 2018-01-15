@@ -8,7 +8,7 @@ A proof-of-concept web UI for Girder built with
 
 ## How to build, test, etc.
 
-Before anything else, do `npm install`.
+First, run `npm install`.
 
 Run the client in watch mode with `npm start`.
 The development server is set up to proxy all requests under `/api/v1` to `http://localhost:8080`,
@@ -20,9 +20,13 @@ Build production code (in `/build`) with `npm run build`.
 
 Build the library (in `/lib`) with `npm run lib`.
 
+See the [Girder application README](app/README.md) for information on how to setup and build Girder with a plugin enabled.
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find information on how to perform common tasks
 [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+See
 
 ## Why?
 
