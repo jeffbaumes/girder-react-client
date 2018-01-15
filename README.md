@@ -165,9 +165,7 @@ Use the exported Girder app object in `src/index.js`
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-// import App from './App'; --- remove
-// import './index.css'; --- remove
-import App from 'girder-react-client'; // --- add
+import App from 'girder-react-client';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
