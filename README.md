@@ -195,5 +195,5 @@ npm start
 
 ## Using plugin endpoints
 
-See the [table-view](plugins/table-view/README.md) plugin for an example
+See the [table-view](plugins/table-view) plugin for an example
 of how to use plugin endpoints.
