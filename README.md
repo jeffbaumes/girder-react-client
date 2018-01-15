@@ -20,7 +20,7 @@ Build production code (in `/build`) with `npm run build`.
 
 Build the library (in `/lib`) with `npm run lib`.
 
-See the [Girder application README](app/README.md) for information on how to setup and build Girder with a plugin enabled.
+See the [Girder application README](app) for information on how to setup and build Girder with a plugin enabled.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find information on how to perform common tasks
