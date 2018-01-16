@@ -31,7 +31,7 @@ it('sets correct props', () => {
   mockAxios.onGet().reply(200, {});
   const store = mockStore(storeContent);
 
-  const comp = mountWithRouterAndStore(<ResourcePageContainer type='item' />, store);
+  const comp = mountWithRouterAndStore(<ResourcePageContainer resource={storeContent.focusedResource} />, store, '/item/me');
   const props = comp.find(ResourcePage).props();
   expect(props).toMatchObject({
     resource: storeContent.focusedResource.resource,
@@ -45,7 +45,7 @@ it('calls fetch', done => {
   mockAxios.onGet().reply(200, {});
   const store = mockStore(storeContent);
 
-  const comp = mountWithRouterAndStore(<ResourcePageContainer type='item' />, store);
+  const comp = mountWithRouterAndStore(<ResourcePageContainer resource={storeContent.focusedResource} />, store, '/item/me');
   comp.find(ResourcePage).props().fetch({folderId: 'i', name: 'n', description: 'd'}).then(() => {
     // There are two sets of actions: one happens in componentDidMount of ResourcePage
     // (which we do not have the access to the promise of), and one that is called here.
