@@ -69,6 +69,6 @@ export const actions = [
   {
     key: 'new-folder',
     component: 'folder.createAction',
-    condition: resource => resource.accessLevel >= accessLevels.WRITE,
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
 ];
