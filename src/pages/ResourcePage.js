@@ -12,10 +12,7 @@ class ResourcePage extends Component {
   componentWillReceiveProps(newProps) {
     const { match: { params: { id, query } } } = this.props;
     const { match: { params: { id: newId, query: newQuery } } } = newProps;
-    if (newId !== id) {
-      newProps.fetch();
-    }
-    if (newQuery !== query) {
+    if (newId !== id || newQuery !== query) {
       newProps.fetch();
     }
   }
