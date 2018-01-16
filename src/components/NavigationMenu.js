@@ -3,7 +3,7 @@ import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const NavigationMenu = ({ menuItems, activeItem, history, match, userId }) => (
-  <Menu stackable secondary>
+  <Menu stackable attached borderless size='tiny'>
     <Container>
       {
         menuItems.map(it => {
