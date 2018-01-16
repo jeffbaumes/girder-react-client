@@ -12,13 +12,10 @@ Since nothing is released on npm, you will need to set up some local links.
 # Setup and build girder client library
 cd ..
 npm link    # links girder-react-client to local registry
-npm run lib # builds the girder client library
 
 # Setup and build table view plugin
 cd plugins/table-view
 npm link                     # links girder-plugin-table-view to local registry
-npm link girder-react-client # uses linked girder-react-client in plugin
-npm run lib                  # builds the plugin library
 
 # Setup and build girder client app
 cd ../../app
