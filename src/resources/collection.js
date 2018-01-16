@@ -5,6 +5,7 @@ import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import RemoveResourceContainer from '../containers/RemoveResourceContainer';
+import accessLevels from './accessLevels';
 
 export const type = 'collection';
 export const name = 'Collection';
@@ -88,6 +89,7 @@ export const rootActions = [
   {
     key: 'new-collection',
     component: 'collection.createAction',
+    condition: ({ user }) => user.admin,
   },
 ];
 
@@ -95,13 +97,16 @@ export const actions = [
   {
     key: 'update-collection',
     component: 'collection.updateAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'new-folder',
     component: 'folder.createAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'remove-collection',
     component: 'collection.removeAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.ADMIN,
   },
 ];

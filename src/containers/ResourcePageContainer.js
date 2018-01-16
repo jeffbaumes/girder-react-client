@@ -9,6 +9,7 @@ const mapStateToProps = state => {
     resource: resource,
     breadcrumbs: rootPath,
     children,
+    user: state.user,
   }
 };
 

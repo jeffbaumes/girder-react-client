@@ -25,6 +25,7 @@ class ResourcePage extends Component {
       resource,
       breadcrumbs = [],
       children = [],
+      user,
     } = this.props;
 
     if (!resource || !resource.id || !resources[resource.type]) {
@@ -73,7 +74,7 @@ class ResourcePage extends Component {
             </Header.Content>
           </Header>
           {
-            actions.filter(action => !action.condition || action.condition(resource)).map(action => {
+            actions.filter(action => !action.condition || action.condition({resource, user, path: breadcrumbs})).map(action => {
               let ActionComponent = action.component;
               if (typeof ActionComponent === 'string') {
                 const [type, field] = ActionComponent.split('.');

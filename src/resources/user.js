@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { rootModel, resourceFromModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
+import accessLevels from './accessLevels';
 
 export const type = 'user';
 export const name = 'User';
@@ -68,5 +69,6 @@ export const actions = [
   {
     key: 'new-folder',
     component: 'folder.createAction',
+    condition: resource => resource.accessLevel >= accessLevels.WRITE,
   },
 ];

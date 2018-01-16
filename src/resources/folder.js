@@ -5,6 +5,7 @@ import { resourceFromModel, rootModel } from './resource';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
 import RemoveResourceContainer from '../containers/RemoveResourceContainer';
+import accessLevels from './accessLevels';
 
 export const type = 'folder';
 export const name = 'Folder';
@@ -108,17 +109,21 @@ export const actions = [
   {
     key: 'update-folder',
     component: 'folder.updateAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'new-folder',
     component: 'folder.createAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'new-item',
     component: 'item.createAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'remove-folder',
     component: 'folder.removeAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.ADMIN,
   },
 ];

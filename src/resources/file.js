@@ -4,6 +4,7 @@ import { Button, Icon } from 'semantic-ui-react';
 import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
 import RemoveResourceContainer from '../containers/RemoveResourceContainer';
+import accessLevels from './accessLevels';
 
 export const type = 'file';
 export const name = 'File';
@@ -64,6 +65,11 @@ export const item = ({ resource }) => (
 
 export const removeAction = RemoveResourceContainer;
 
+export const accessLevelForPath = path => {
+  const parent = path[path.length - 3];
+  return parent.accessLevel;
+};
+
 export const actions = [
   {
     key: 'download-file',
@@ -77,5 +83,6 @@ export const actions = [
   {
     key: 'remove-file',
     component: 'file.removeAction',
+    condition: ({ path }) => accessLevelForPath(path) >= accessLevels.WRITE,
   }
 ];

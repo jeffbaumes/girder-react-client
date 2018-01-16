@@ -7,8 +7,8 @@ class EditResource extends Component {
 
   defaultFormInputs = ({ state, onChange }) => (
     <div>
-      <Form.Input label='Name' name='name' value={state.name} onChange={onChange} />
-      <Form.Input label='Description' name='description' value={state.description} onChange={onChange} />
+      <Form.Input label='Name' name='name' value={state.name || ''} onChange={onChange} />
+      <Form.Input label='Description' name='description' value={state.description || ''} onChange={onChange} />
     </div>
   )
 

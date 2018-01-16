@@ -5,6 +5,7 @@ import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import RemoveResourceContainer from '../containers/RemoveResourceContainer';
+import accessLevels from './accessLevels';
 
 export const type = 'item';
 export const name = 'Item';
@@ -99,13 +100,20 @@ export const item = ({ resource }) => (
   />
 );
 
+export const accessLevelForPath = path => {
+  const parent = path[path.length - 2];
+  return parent.accessLevel;
+};
+
 export const actions = [
   {
     key: 'update-item',
     component: 'item.updateAction',
+    condition: ({ path }) => accessLevelForPath(path) >= accessLevels.WRITE,
   },
   {
     key: 'remove-item',
     component: 'item.removeAction',
+    condition: ({ path }) => accessLevelForPath(path) >= accessLevels.WRITE,
   },
 ];

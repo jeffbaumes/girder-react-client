@@ -7,7 +7,7 @@ export const load = () => {
     type: 'file',
     key: 'table-view',
     component: TableViewAction,
-    condition: parserForFile,
+    condition: ({ resource }) => parserForFile(resource),
   });
 
   addRoutedContent({

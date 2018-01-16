@@ -5,6 +5,7 @@ import { rootModel, resourceFromModel } from './resource';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
 import RemoveResourceContainer from '../containers/RemoveResourceContainer';
+import accessLevels from './accessLevels';
 
 export const fromModel = resourceFromModel;
 
@@ -100,6 +101,7 @@ export const rootActions = [
   {
     key: 'new-group',
     component: 'group.createAction',
+    condition: ({ user }) => user.id,
   },
 ];
 
@@ -107,13 +109,16 @@ export const actions = [
   {
     key: 'update-group',
     component: 'group.updateAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'new-group-member',
     component: 'groupMember.createAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.WRITE,
   },
   {
     key: 'remove-group',
     component: 'group.removeAction',
+    condition: ({ resource }) => resource.accessLevel >= accessLevels.ADMIN,
   },
 ];
