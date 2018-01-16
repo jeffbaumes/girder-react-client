@@ -12,10 +12,15 @@ export const icon = 'file';
 export const rootChildrenHeading = 'Files';
 export const childrenHeading = null;
 
-export const fromModel = resourceFromModel;
+export const fromModel = file => (
+  {
+    ...resourceFromModel(file),
+    description: `${file.size} bytes`,
+  }
+);
 
 export const fetchOne = ({ id }) => {
-  return axios.get(`/file/${id}`).then(result => {
+  return axios.get(`/${type}/${id}`).then(result => {
     return result.data;
   })
 };
@@ -28,7 +33,7 @@ export const fetchResourcePath = ({ id }) => {
   // TOOD: We end up getting the file twice (fetchOne and fetchResourcePath)
   // from setResourceFocus in modules/focusedResource.js.
   // We should perhaps order the calls pass item id here to avoid this.
-  return axios.get(`/file/${id}`).then(fileResult => {
+  return axios.get(`/${type}/${id}`).then(fileResult => {
     return Promise.all([
       axios.get(`/item/${fileResult.data.itemId}/rootpath`),
       axios.get(`/item/${fileResult.data.itemId}`),
@@ -51,12 +56,12 @@ export const fetchChildren = ({ id }) => {
 };
 
 export const fileContent = ({ id }) => {
-  return axios.get(`/file/${id}/download`).then(result => result.data);
+  return axios.get(`/${type}/${id}/download`).then(result => result.data);
 }
 
 export const item = ({ resource }) => (
   <ResourceItem
-    url={`/file/${resource.id}`}
+    url={`/${type}/${resource.id}`}
     icon={icon}
     name={resource.name}
     description={resource.description}
