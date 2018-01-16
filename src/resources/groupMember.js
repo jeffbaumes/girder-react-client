@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form } from 'semantic-ui-react';
 import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
-import NewResourceContainer from '../containers/NewResourceContainer';
+import EditResourceContainer from '../containers/EditResourceContainer';
 import { resourceFromModel } from './resource';
 
 export const fromModel = groupMember => (
@@ -52,7 +52,7 @@ export const item = ({ resource }) => (
   />
 );
 
-export const createAction = bindProps(NewResourceContainer, {
+export const createAction = bindProps(EditResourceContainer, {
   type,
   name,
   icon,

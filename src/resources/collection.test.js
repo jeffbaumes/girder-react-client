@@ -86,7 +86,7 @@ it('create produces correct request', done => {
 //   />
 // );
 
-// export const createAction = bindProps(NewResourceContainer, {type, name, icon});
+// export const createAction = bindProps(EditResourceContainer, {type, name, icon});
 
 // export const rootActions = [
 //   {

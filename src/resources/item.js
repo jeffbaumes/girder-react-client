@@ -3,7 +3,7 @@ import axios from 'axios';
 import bindProps from '../bindProps';
 import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
-import NewResourceContainer from '../containers/NewResourceContainer';
+import EditResourceContainer from '../containers/EditResourceContainer';
 
 export const type = 'item';
 export const name = 'Item';
@@ -59,7 +59,7 @@ export const update = ({id, name, description}) => {
   });
 };
 
-export const createAction = bindProps(NewResourceContainer, {
+export const createAction = bindProps(EditResourceContainer, {
   type,
   name,
   icon,
@@ -70,7 +70,7 @@ export const createAction = bindProps(NewResourceContainer, {
   },
 });
 
-export const updateAction = bindProps(NewResourceContainer, {
+export const updateAction = bindProps(EditResourceContainer, {
   type,
   name,
   icon,

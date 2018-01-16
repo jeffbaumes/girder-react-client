@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Icon, Message, Modal } from 'semantic-ui-react';
 
-class NewResource extends Component {
+class EditResource extends Component {
 
   state = {}
 
@@ -94,4 +94,4 @@ class NewResource extends Component {
   }
 }
 
-export default NewResource;
+export default EditResource;

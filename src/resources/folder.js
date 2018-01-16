@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import bindProps from '../bindProps';
 import { resourceFromModel, rootModel } from './resource';
-import NewResourceContainer from '../containers/NewResourceContainer';
+import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
 
 export const type = 'folder';
@@ -73,7 +73,7 @@ export const item = ({ resource }) => (
   />
 );
 
-export const createAction = bindProps(NewResourceContainer, {
+export const createAction = bindProps(EditResourceContainer, {
   type,
   name,
   icon,
@@ -84,7 +84,7 @@ export const createAction = bindProps(NewResourceContainer, {
   },
 });
 
-export const updateAction = bindProps(NewResourceContainer, {
+export const updateAction = bindProps(EditResourceContainer, {
   type,
   name,
   icon,

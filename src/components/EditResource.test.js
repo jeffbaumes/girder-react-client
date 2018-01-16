@@ -1,10 +1,10 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Button, Modal } from 'semantic-ui-react';
-import NewResource from './NewResource';
+import EditResource from './EditResource';
 
 it('renders modal set to be open', () => {
-  const comp = shallow(<NewResource
+  const comp = shallow(<EditResource
     modalOpen={true}
   />);
   expect(comp.find(Modal).props().open).toBe(true);
@@ -12,7 +12,7 @@ it('renders modal set to be open', () => {
 
 it('calls onOpen', () => {
   const onOpen = jest.fn();
-  const comp = mount(<NewResource
+  const comp = mount(<EditResource
     onOpen={onOpen}
     name='Item'
   />);
@@ -22,55 +22,55 @@ it('calls onOpen', () => {
 
 it('calls onClose on cancel', () => {
   const onClose = jest.fn();
-  const create = jest.fn();
-  const comp = shallow(<NewResource
+  const submit = jest.fn();
+  const comp = shallow(<EditResource
     onClose={onClose}
-    create={create}
+    submit={submit}
     name='Item'
   />);
   comp.find(Button).at(0).simulate('click');
   comp.find(Button).find({content: 'Cancel'}).simulate('click');
-  expect(create).not.toHaveBeenCalled();
+  expect(submit).not.toHaveBeenCalled();
   expect(onClose).toHaveBeenCalled();
 });
 
-it('calls onClose and create on submit', () => {
+it('calls onClose and submit on submit', () => {
   const onClose = jest.fn();
-  const create = jest.fn();
-  const comp = shallow(<NewResource
+  const submit = jest.fn();
+  const comp = shallow(<EditResource
     onClose={onClose}
-    create={create}
+    submit={submit}
     name='Item'
   />);
   comp.find(Button).at(0).simulate('click');
   comp.find(Button).find({content: 'Create Item'}).simulate('click');
-  expect(create).toHaveBeenCalledWith({name: '', description: ''});
+  expect(submit).toHaveBeenCalledWith({name: '', description: ''});
   expect(onClose).toHaveBeenCalled();
 });
 
-it('calls create on submit with correct arguments', () => {
-  const create = jest.fn();
-  const comp = shallow(<NewResource
-    create={create}
+it('calls submit on submit with correct arguments', () => {
+  const submit = jest.fn();
+  const comp = shallow(<EditResource
+    submit={submit}
     name='Item'
   />);
   comp.find(Button).at(0).simulate('click');
   comp.instance().handleChange(null, {name: 'name', value: 'Hello'});
   comp.instance().handleChange(null, {name: 'description', value: 'World'});
   comp.find(Button).find({content: 'Create Item'}).simulate('click');
-  expect(create).toHaveBeenCalledWith({name: 'Hello', description: 'World'});
+  expect(submit).toHaveBeenCalledWith({name: 'Hello', description: 'World'});
 });
 
-it('calls onSubmit if specified, which may not call create', () => {
+it('calls onSubmit if specified, which may not call submit', () => {
   const onSubmit = jest.fn();
-  const create = jest.fn();
-  const comp = shallow(<NewResource
+  const submit = jest.fn();
+  const comp = shallow(<EditResource
     onSubmit={onSubmit}
-    create={create}
+    submit={submit}
     name='Item'
   />);
   comp.find(Button).at(0).simulate('click');
   comp.find(Button).find({content: 'Create Item'}).simulate('click');
   expect(onSubmit).toHaveBeenCalled();
-  expect(create).not.toHaveBeenCalled();
+  expect(submit).not.toHaveBeenCalled();
 });

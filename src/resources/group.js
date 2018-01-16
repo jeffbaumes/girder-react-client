@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import bindProps from '../bindProps';
 import { rootModel, resourceFromModel } from './resource';
-import NewResourceContainer from '../containers/NewResourceContainer';
+import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
 
 export const fromModel = resourceFromModel;
@@ -65,7 +65,7 @@ export const item = ({ resource }) => (
   />
 );
 
-export const createAction = bindProps(NewResourceContainer, {type, name, icon});
+export const createAction = bindProps(EditResourceContainer, {type, name, icon});
 
 export const rootActions = [
   {

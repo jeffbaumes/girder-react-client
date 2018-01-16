@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import NewResource from '../components/NewResource';
+import EditResource from '../components/EditResource';
 import { openModal, closeModal } from '../modules/modal';
 import { createChild, update } from '../modules/focusedResource';
 
@@ -31,9 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => (
   }
 );
 
-const NewResourceContainer = withRouter(connect(
+const EditResourceContainer = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(NewResource));
+)(EditResource));
 
-export default NewResourceContainer;
+export default EditResourceContainer;
