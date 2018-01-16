@@ -80,6 +80,7 @@ export const item = ({ resource }) => (
 );
 
 export const createAction = bindProps(EditResourceContainer, {
+  type,
   onSubmit: (state, props) => {
     const { name = '', description = '' } = state;
     const { id : parentId, type : parentType } = props.resource;

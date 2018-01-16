@@ -53,6 +53,7 @@ export const item = ({ resource }) => (
 );
 
 export const createAction = bindProps(EditResourceContainer, {
+  type,
   formInputs: ({ onChange }) => (
     <div>
       <Form.Input label='User ID' name='userId' onChange={onChange} />

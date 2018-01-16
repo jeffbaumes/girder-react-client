@@ -80,7 +80,7 @@ export const item = ({ resource }) => (
   />
 );
 
-export const createAction = EditResourceContainer;
+export const createAction = bindProps(EditResourceContainer, {type});
 
 export const updateAction = bindProps(EditResourceContainer, {
   update: true,

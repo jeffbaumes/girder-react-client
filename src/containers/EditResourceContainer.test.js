@@ -29,7 +29,7 @@ it('sets modalOpen correctly to true', () => {
   const store = mockStore({
     modal: {openModal: 'new-item'},
   });
-  const comp = mountWithRouterAndStore(<EditResourceContainer actionId='new-item' />, store);
+  const comp = mountWithRouterAndStore(<EditResourceContainer type='item' actionId='new-item' />, store);
   expect(comp.find(EditResource).props().modalOpen).toBe(true);
 });
 
@@ -37,7 +37,7 @@ it('sets modalOpen correctly to false', () => {
   const store = mockStore({
     modal: {openModal: 'new-item'},
   });
-  const comp = mountWithRouterAndStore(<EditResourceContainer actionId='new-folder'/>, store);
+  const comp = mountWithRouterAndStore(<EditResourceContainer type='item' actionId='new-folder'/>, store);
   expect(comp.find(EditResource).props().modalOpen).toBe(false);
 });
 
@@ -45,7 +45,7 @@ it('dispatches openModal', () => {
   const store = mockStore({
     modal: {openModal: null},
   });
-  const comp = mountWithRouterAndStore(<EditResourceContainer actionId='new-folder' />, store);
+  const comp = mountWithRouterAndStore(<EditResourceContainer type='item' actionId='new-folder' />, store);
   comp.find(EditResource).props().onOpen();
   expect(store.getActions()).toEqual([{
     type: OPEN_MODAL,
@@ -57,7 +57,7 @@ it('dispatches closeModal', () => {
   const store = mockStore({
     modal: {openModal: null},
   });
-  const comp = mountWithRouterAndStore(<EditResourceContainer />, store);
+  const comp = mountWithRouterAndStore(<EditResourceContainer type='item' />, store);
   comp.find(EditResource).props().onClose();
   expect(store.getActions()).toEqual([{
     type: CLOSE_MODAL,

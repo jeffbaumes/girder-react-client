@@ -3,9 +3,14 @@ import { withRouter } from 'react-router-dom';
 import EditResource from '../components/EditResource';
 import { openModal, closeModal } from '../modules/modal';
 import { createChild, update } from '../modules/focusedResource';
+import resources from '../resources';
 
 const mapStateToProps = (state, ownProps) => {
+  const type = ownProps.type || ownProps.resource.type;
   return {
+    type,
+    name: resources[type].name,
+    icon: resources[type].icon,
     modalOpen: state.modal.openModal === ownProps.actionId,
   };
 };
@@ -19,12 +24,13 @@ const mapDispatchToProps = (dispatch, ownProps) => (
       return dispatch(closeModal());
     },
     submit: options => {
+      const type = ownProps.type || ownProps.resource.type;
       if (ownProps.update) {
-        return dispatch(update(ownProps.type, options)).then(() => {
+        return dispatch(update(type, options)).then(() => {
           return dispatch(closeModal());
         });
       }
-      return dispatch(createChild(ownProps.type, options)).then(() => {
+      return dispatch(createChild(type, options)).then(() => {
         return dispatch(closeModal());
       });
     }
