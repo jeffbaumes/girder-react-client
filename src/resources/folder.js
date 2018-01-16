@@ -14,13 +14,13 @@ export const childrenHeading = 'Contents';
 export const fromModel = resourceFromModel;
 
 export const fetchOne = ({ id }) => {
-  return axios.get(`/folder/${id}`).then(result => {
+  return axios.get(`/${type}/${id}`).then(result => {
     return result.data;
   })
 };
 
 export const fetchMany = ({ query = '' } = {}) => {
-  return axios.get(`/resource/search?q=${query}&mode=prefix&types=["folder"]&limit=100`).then(result => {
+  return axios.get(`/resource/search?q=${query}&mode=prefix&types=["${type}"]&limit=100`).then(result => {
     return result.data.folder || [];
   });
 };
@@ -50,7 +50,16 @@ export const create = ({parentId, parentType, name, description}) => {
   params.append('parentType', parentType);
   params.append('name', name);
   params.append('description', description || '');
-  return axios.post('/folder', params).then(result => {
+  return axios.post(`/${type}`, params).then(result => {
+    return result.data;
+  });
+};
+
+export const update = ({id, name, description}) => {
+  var params = new URLSearchParams();
+  params.append('name', name);
+  params.append('description', description || '');
+  return axios.put(`/${type}/${id}`, params).then(result => {
     return result.data;
   });
 };
@@ -71,11 +80,28 @@ export const createAction = bindProps(NewResourceContainer, {
   onSubmit: (state, props) => {
     const { name = '', description = '' } = state;
     const { id : parentId, type : parentType } = props.resource;
-    props.create({parentId, parentType, name, description});
+    props.submit({parentId, parentType, name, description});
+  },
+});
+
+export const updateAction = bindProps(NewResourceContainer, {
+  type,
+  name,
+  icon,
+  update: true,
+  initialValues: ({ name, description }) => ({name, description}),
+  onSubmit: (state, props) => {
+    const { name = '', description = '' } = state;
+    const { id } = props.resource;
+    props.submit({id, name, description});
   },
 });
 
 export const actions = [
+  {
+    key: 'update-folder',
+    component: 'folder.updateAction',
+  },
   {
     key: 'new-folder',
     component: 'folder.createAction',

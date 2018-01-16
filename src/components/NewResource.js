@@ -5,10 +5,10 @@ class NewResource extends Component {
 
   state = {}
 
-  defaultFormInputs = ({ onChange }) => (
+  defaultFormInputs = ({ state, onChange }) => (
     <div>
-      <Form.Input label='Name' name='name' onChange={onChange} />
-      <Form.Input label='Description' name='description' onChange={onChange} />
+      <Form.Input label='Name' name='name' value={state.name} onChange={onChange} />
+      <Form.Input label='Description' name='description' value={state.description} onChange={onChange} />
     </div>
   )
 
@@ -16,6 +16,9 @@ class NewResource extends Component {
     this.setState({});
     if (this.props.onOpen) {
       this.props.onOpen();
+    }
+    if (this.props.update) {
+      this.setState(this.props.initialValues(this.props.resource));
     }
   }
 
@@ -29,7 +32,7 @@ class NewResource extends Component {
     if (!onSubmit) {
       onSubmit = (state, props) => {
         const { name = '', description = '' } = state;
-        props.create({name, description});
+        props.submit({name, description});
       };
     }
 
@@ -43,27 +46,36 @@ class NewResource extends Component {
       formInputs : FormInputs = this.defaultFormInputs,
       errorMessage,
       icon,
-      name
+      name,
+      update = false,
     } = this.props;
     return (
       <Modal
         trigger={
           <Button>
-            <Icon.Group>
-              <Icon name={icon} />
-              <Icon corner name='add' />
-            </Icon.Group>
-            {` Add ${name}`}
+            {
+              update ?
+              <Icon name='edit' />
+              :
+              <Icon.Group>
+                <Icon name={icon} />
+                <Icon corner name='add' />
+              </Icon.Group>
+            }
+            {` ${update ? 'Edit' : `Add ${name}`}`}
           </Button>
         }
         open={modalOpen}
         onOpen={this.openModal}
         onClose={onClose}
       >
-        <Modal.Header>New {name}</Modal.Header>
+        <Modal.Header>
+          <Icon name={icon} />
+          {`${update ? 'Edit' : 'New'} ${name}`}
+        </Modal.Header>
         <Modal.Content>
           <Form error onSubmit={this.submit}>
-            <FormInputs onChange={this.handleChange} />
+            <FormInputs state={this.state} onChange={this.handleChange} />
             <Message
               error
               content={errorMessage}
@@ -75,7 +87,7 @@ class NewResource extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={onClose} content='Cancel' />
-          <Button color='green' onClick={this.submit} content={`Create ${name}`} />
+          <Button color='green' onClick={this.submit} content={`${update ? 'Update' : 'Create'} ${name}`} />
         </Modal.Actions>
       </Modal>
     )

@@ -4,8 +4,7 @@ import { rootModel } from '../resources/resource';
 export const REFOCUS_REQUESTED = 'focusedResource/REFOCUS_REQUESTED';
 export const REFOCUS = 'focusedResource/REFOCUS';
 export const ADD_CHILD = 'focusedResource/ADD_CHILD';
-export const MORE_CHILDREN_REQUESTED = 'focusedResource/MORE_CHILDREN_REQUESTED';
-export const MORE_CHILDREN = 'focusedResource/MORE_CHILDREN';
+export const UPDATE = 'focusedResource/UPDATE';
 
 const nullResource = {
   id: null,
@@ -39,6 +38,14 @@ export default (state = initialState, action) => {
         children: action.children,
         rootPath: action.rootPath,
         isUpdating: false,
+      };
+    case UPDATE:
+      return {
+        ...state,
+        resource: {
+          ...state.resource,
+          ...action.resourceUpdates,
+        },
       };
     case ADD_CHILD:
       return {
@@ -81,6 +88,17 @@ export const createChild = (type, options) => {
       return dispatch({
         type: ADD_CHILD,
         resource: resources[type].fromModel(model),
+      });
+    });
+  };
+};
+
+export const update = (type, options) => {
+  return dispatch => {
+    return resources[type].update(options).then(model => {
+      return dispatch({
+        type: UPDATE,
+        resourceUpdates: resources[type].fromModel(model),
       });
     });
   };

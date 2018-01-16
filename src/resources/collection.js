@@ -44,6 +44,15 @@ export const create = ({name, description}) => {
   });
 };
 
+export const update = ({id, name, description}) => {
+  var params = new URLSearchParams();
+  params.append('name', name);
+  params.append('description', description || '');
+  return axios.put(`/${type}/${id}`, params).then(result => {
+    return result.data;
+  });
+};
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/${type}/${resource.id}`}
@@ -55,6 +64,19 @@ export const item = ({ resource }) => (
 
 export const createAction = bindProps(NewResourceContainer, {type, name, icon});
 
+export const updateAction = bindProps(NewResourceContainer, {
+  type,
+  name,
+  icon,
+  update: true,
+  initialValues: ({ name, description }) => ({name, description}),
+  onSubmit: (state, props) => {
+    const { name = '', description = '' } = state;
+    const { id } = props.resource;
+    props.submit({id, name, description});
+  },
+});
+
 export const rootActions = [
   {
     key: 'new-collection',
@@ -63,6 +85,10 @@ export const rootActions = [
 ];
 
 export const actions = [
+  {
+    key: 'update-collection',
+    component: 'collection.updateAction',
+  },
   {
     key: 'new-folder',
     component: 'folder.createAction',

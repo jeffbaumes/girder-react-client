@@ -79,7 +79,7 @@ class ResourcePage extends Component {
                 const [type, field] = ActionComponent.split('.');
                 ActionComponent = resources[type][field];
               }
-              return <ActionComponent resource={resource} key={action.key} />;
+              return <ActionComponent resource={resource} key={action.key} actionId={action.key} />;
             })
           }
           {

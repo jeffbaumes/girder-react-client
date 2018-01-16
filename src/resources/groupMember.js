@@ -66,7 +66,7 @@ export const createAction = bindProps(NewResourceContainer, {
   onSubmit: (state, props) => {
     const { userId = '', level = '0', force = 'false' } = state;
     const { id : parentId } = props.resource;
-    props.create({groupId: parentId, userId, level, force});
+    props.submit({groupId: parentId, userId, level, force});
   },
 });
 
