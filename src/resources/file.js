@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
+import RemoveResourceContainer from '../containers/RemoveResourceContainer';
 
 export const type = 'file';
 export const name = 'File';
@@ -40,6 +41,10 @@ export const fetchResourcePath = ({ id }) => {
   });
 };
 
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const fetchChildren = ({ id }) => {
   return Promise.resolve([]);
 };
@@ -57,11 +62,20 @@ export const item = ({ resource }) => (
   />
 );
 
+export const removeAction = RemoveResourceContainer;
+
 export const actions = [
   {
     key: 'download-file',
     component: ({ resource }) => (
-      <Button as='a' href={`/api/v1/file/${resource.id}/download`} content='Download' />
+      <Button as='a' href={`/api/v1/file/${resource.id}/download`}>
+        <Icon name='download' />
+        Download
+      </Button>
     ),
   },
+  {
+    key: 'remove-file',
+    component: 'file.removeAction',
+  }
 ];

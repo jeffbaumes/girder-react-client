@@ -4,6 +4,7 @@ import bindProps from '../bindProps';
 import { resourceFromModel, rootModel } from './resource';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
+import RemoveResourceContainer from '../containers/RemoveResourceContainer';
 
 export const type = 'folder';
 export const name = 'Folder';
@@ -64,6 +65,10 @@ export const update = ({id, name, description}) => {
   });
 };
 
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/${type}/${resource.id}`}
@@ -97,6 +102,8 @@ export const updateAction = bindProps(EditResourceContainer, {
   },
 });
 
+export const removeAction = RemoveResourceContainer;
+
 export const actions = [
   {
     key: 'update-folder',
@@ -109,5 +116,9 @@ export const actions = [
   {
     key: 'new-item',
     component: 'item.createAction',
+  },
+  {
+    key: 'remove-folder',
+    component: 'folder.removeAction',
   },
 ];

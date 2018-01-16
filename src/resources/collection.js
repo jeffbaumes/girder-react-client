@@ -4,6 +4,7 @@ import { resourceFromModel, rootModel } from './resource';
 import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
 import EditResourceContainer from '../containers/EditResourceContainer';
+import RemoveResourceContainer from '../containers/RemoveResourceContainer';
 
 export const type = 'collection';
 export const name = 'Collection';
@@ -53,6 +54,10 @@ export const update = ({id, name, description}) => {
   });
 };
 
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/${type}/${resource.id}`}
@@ -77,6 +82,8 @@ export const updateAction = bindProps(EditResourceContainer, {
   },
 });
 
+export const removeAction = RemoveResourceContainer;
+
 export const rootActions = [
   {
     key: 'new-collection',
@@ -92,5 +99,9 @@ export const actions = [
   {
     key: 'new-folder',
     component: 'folder.createAction',
+  },
+  {
+    key: 'remove-collection',
+    component: 'collection.removeAction',
   },
 ];

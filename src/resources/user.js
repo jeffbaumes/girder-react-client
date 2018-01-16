@@ -51,6 +51,10 @@ export const create = ({login, password, firstName, lastName, email}) => {
   });
 };
 
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/${type}/${resource.id}`}

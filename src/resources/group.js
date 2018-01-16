@@ -4,6 +4,7 @@ import bindProps from '../bindProps';
 import { rootModel, resourceFromModel } from './resource';
 import EditResourceContainer from '../containers/EditResourceContainer';
 import ResourceItem from '../components/ResourceItem';
+import RemoveResourceContainer from '../containers/RemoveResourceContainer';
 
 export const fromModel = resourceFromModel;
 
@@ -50,6 +51,19 @@ export const create = ({name, description}) => {
   });
 };
 
+export const update = ({id, name, description}) => {
+  var params = new URLSearchParams();
+  params.append('name', name);
+  params.append('description', description || '');
+  return axios.put(`/${type}/${id}`, params).then(result => {
+    return result.data;
+  });
+};
+
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const type = 'group';
 export const name = 'Group';
 export const icon = 'users';
@@ -67,6 +81,21 @@ export const item = ({ resource }) => (
 
 export const createAction = bindProps(EditResourceContainer, {type, name, icon});
 
+export const updateAction = bindProps(EditResourceContainer, {
+  type,
+  name,
+  icon,
+  update: true,
+  initialValues: ({ name, description }) => ({name, description}),
+  onSubmit: (state, props) => {
+    const { name = '', description = '' } = state;
+    const { id } = props.resource;
+    props.submit({id, name, description});
+  },
+});
+
+export const removeAction = RemoveResourceContainer;
+
 export const rootActions = [
   {
     key: 'new-group',
@@ -76,7 +105,15 @@ export const rootActions = [
 
 export const actions = [
   {
+    key: 'update-group',
+    component: 'group.updateAction',
+  },
+  {
     key: 'new-group-member',
     component: 'groupMember.createAction',
+  },
+  {
+    key: 'remove-group',
+    component: 'group.removeAction',
   },
 ];

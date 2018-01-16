@@ -62,7 +62,7 @@ class EditResource extends Component {
                 <Icon corner name='add' />
               </Icon.Group>
             }
-            {` ${update ? 'Edit' : `Add ${name}`}`}
+            {update ? 'Edit' : ` Add ${name}`}
           </Button>
         }
         open={modalOpen}

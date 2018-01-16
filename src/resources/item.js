@@ -4,6 +4,7 @@ import bindProps from '../bindProps';
 import { resourceFromModel, rootModel } from './resource';
 import ResourceItem from '../components/ResourceItem';
 import EditResourceContainer from '../containers/EditResourceContainer';
+import RemoveResourceContainer from '../containers/RemoveResourceContainer';
 
 export const type = 'item';
 export const name = 'Item';
@@ -59,6 +60,10 @@ export const update = ({id, name, description}) => {
   });
 };
 
+export const remove = ({id}) => {
+  return axios.delete(`/${type}/${id}`).then(result => result.data);
+};
+
 export const createAction = bindProps(EditResourceContainer, {
   type,
   name,
@@ -83,6 +88,8 @@ export const updateAction = bindProps(EditResourceContainer, {
   },
 });
 
+export const removeAction = RemoveResourceContainer;
+
 export const item = ({ resource }) => (
   <ResourceItem
     url={`/${type}/${resource.id}`}
@@ -96,5 +103,9 @@ export const actions = [
   {
     key: 'update-item',
     component: 'item.updateAction',
+  },
+  {
+    key: 'remove-item',
+    component: 'item.removeAction',
   },
 ];

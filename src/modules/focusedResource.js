@@ -103,3 +103,9 @@ export const update = (type, options) => {
     });
   };
 };
+
+export const remove = (type, options) => {
+  return dispatch => {
+    return resources[type].remove(options);
+  };
+};
