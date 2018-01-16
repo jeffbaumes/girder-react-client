@@ -53,7 +53,7 @@ class ResourcePage extends Component {
               if (crumb.id !== crumb.type) {
                 url += `/${crumb.id}`;
               }
-              const section = <Breadcrumb.Section as={Link} to={url} key={crumb.id}>{crumb.name}</Breadcrumb.Section>;
+              const section = <Breadcrumb.Section as={Link} to={url} key={crumb.id}><Icon name={resources[crumb.type].icon} />{crumb.name}</Breadcrumb.Section>;
               if (i < breadcrumbs.length - 1) {
                 return [
                   section,
