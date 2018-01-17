@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import { Button, Form, Menu, Message, Modal } from 'semantic-ui-react';
+import AutoFocusForm from './AutoFocusForm';
 
 class UserControls extends Component {
   componentDidMount = () => {
@@ -59,13 +59,7 @@ class UserControls extends Component {
           onClose={onCloseLoginModal}>
           <Modal.Header>Log in</Modal.Header>
           <Modal.Content>
-            <Form error onSubmit={this.submitLogin} ref={form => {
-                if (form && this.opening) {
-                  this.opening = false;
-                  const formEl = findDOMNode(form);
-                  formEl.getElementsByTagName('input')[0].focus();
-                }
-              }}>
+            <AutoFocusForm error onSubmit={this.submitLogin}>
               <Form.Input label='Login or email' name='loginModalUsername' onChange={this.handleChange} />
               <Form.Input label='Password' type='password' name='loginModalPassword'  onChange={this.handleChange} />
               <Message
@@ -75,7 +69,7 @@ class UserControls extends Component {
               <div style={{display: 'none'}}>
                 <Form.Button content='Submit' />
               </div>
-            </Form>
+            </AutoFocusForm>
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={onCloseLoginModal}>

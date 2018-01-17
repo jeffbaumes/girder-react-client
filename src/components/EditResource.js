@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { Button, Form, Icon, Message, Modal } from 'semantic-ui-react';
+import AutoFocusForm from './AutoFocusForm';
 
 class EditResource extends Component {
 
@@ -77,17 +77,7 @@ class EditResource extends Component {
           {`${update ? 'Edit' : 'Create'} ${name}`}
         </Modal.Header>
         <Modal.Content>
-          <Form error onSubmit={this.submit} ref={form => {
-            if (form && this.opening) {
-              this.opening = false;
-              const formEl = findDOMNode(form);
-              const inputs = formEl.getElementsByTagName('input');
-              if (inputs.length > 0) {
-                inputs[0].focus();
-                inputs[0].selectionStart = inputs[0].selectionEnd = inputs[0].value.length;
-              }
-            }
-          }}>
+          <AutoFocusForm error onSubmit={this.submit}>
             <FormInputs state={this.state} onChange={this.handleChange} />
             <Message
               error
@@ -96,7 +86,7 @@ class EditResource extends Component {
             <div style={{display: 'none'}}>
               <Form.Button />
             </div>
-          </Form>
+          </AutoFocusForm>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={onClose} content='Cancel' />
