@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { Button, Form, Icon, Message, Modal } from 'semantic-ui-react';
 
 class EditResource extends Component {
@@ -20,6 +21,7 @@ class EditResource extends Component {
     if (this.props.update) {
       this.setState(this.props.initialValues(this.props.resource));
     }
+    this.opening = true;
   }
 
   handleChange = (e, { name, value }) => {
@@ -51,6 +53,7 @@ class EditResource extends Component {
     } = this.props;
     return (
       <Modal
+        size='tiny'
         trigger={
           <Button>
             {
@@ -71,10 +74,20 @@ class EditResource extends Component {
       >
         <Modal.Header>
           <Icon name={icon} />
-          {`${update ? 'Edit' : 'New'} ${name}`}
+          {`${update ? 'Edit' : 'Create'} ${name}`}
         </Modal.Header>
         <Modal.Content>
-          <Form error onSubmit={this.submit}>
+          <Form error onSubmit={this.submit} ref={form => {
+            if (form && this.opening) {
+              this.opening = false;
+              const formEl = findDOMNode(form);
+              const inputs = formEl.getElementsByTagName('input');
+              if (inputs.length > 0) {
+                inputs[0].focus();
+                inputs[0].selectionStart = inputs[0].selectionEnd = inputs[0].value.length;
+              }
+            }
+          }}>
             <FormInputs state={this.state} onChange={this.handleChange} />
             <Message
               error

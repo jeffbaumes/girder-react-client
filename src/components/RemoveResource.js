@@ -3,6 +3,7 @@ import { Button, Icon, Modal } from 'semantic-ui-react'
 
 const RemoveResource = ({ resource, submit, parent, history }) => (
   <Modal
+    size='tiny'
     trigger={<Button><Icon name='trash' />Delete</Button>}
     header={`Delete "${resource.name}"?`}
     content={`Are you sure you want to delete this ${resource.type}? It cannot be undone.`}

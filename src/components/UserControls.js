@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import { Button, Form, Menu, Message, Modal } from 'semantic-ui-react';
 
@@ -27,6 +28,7 @@ class UserControls extends Component {
       loginModalPassword: null,
     })
     this.props.onOpenLoginModal();
+    this.opening = true;
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -50,14 +52,20 @@ class UserControls extends Component {
       <Menu.Menu position='right'>
         <Menu.Item content='Register' />
         <Modal
-          trigger={<Menu.Item content='Log in'/>}
           size='tiny'
+          trigger={<Menu.Item content='Log in'/>}
           open={loginModalOpen}
           onOpen={this.openLoginModal}
           onClose={onCloseLoginModal}>
           <Modal.Header>Log in</Modal.Header>
           <Modal.Content>
-            <Form error onSubmit={this.submitLogin}>
+            <Form error onSubmit={this.submitLogin} ref={form => {
+                if (form && this.opening) {
+                  this.opening = false;
+                  const formEl = findDOMNode(form);
+                  formEl.getElementsByTagName('input')[0].focus();
+                }
+              }}>
               <Form.Input label='Login or email' name='loginModalUsername' onChange={this.handleChange} />
               <Form.Input label='Password' type='password' name='loginModalPassword'  onChange={this.handleChange} />
               <Message
