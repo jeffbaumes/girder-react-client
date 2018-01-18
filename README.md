@@ -197,3 +197,118 @@ npm start
 
 See the [table-view](plugins/table-view) plugin for an example
 of how to use plugin endpoints.
+
+## Templating: Pug vs. Vuew vs. React
+
+Girder uses Pug as its templating engine. Here is a compilation of normal constructs in Pug along with React and Vue equivalents.
+
+### Accessing a variable in inner text
+
+Pug
+```pug
+div= a
+```
+Pug-flavored Vue
+```pug
+div {{a}}
+```
+React
+```jsx
+<div>{a}</div>
+```
+
+### Accessing a variable in property
+Pug
+```pug
+div(class=a)
+```
+Pug-flavored Vue
+```pug
+div(:class='a')
+```
+React
+```jsx
+<div class={a} />
+```
+
+### Simple conditional
+Pug
+```pug
+if condition
+  div
+```
+Pug-flavored Vue
+```pug
+div(v-if='condition')
+```
+React
+```jsx
+{
+  condition &&
+  <div />
+}
+```
+
+### Complex conditional
+Pug
+```pug
+div The variable x is
+  if x > 0
+    span positive.
+  else if x < 0
+    span negative.
+  else
+    span zero.
+```
+Pug-flavored Vue
+```pug
+div The variable x is
+  span(v-if='x > 0') positive.
+  span(v-else-if='x < 0') negative.
+  span(v-else) zero.
+```
+React
+```jsx
+let indicator;
+if (x > 0) {
+  indicator = <span>positive.</span>;
+} else if (x < 0) {
+  indicator = <span>negative.</span>;
+} else {
+  indicator = <span>zero.</span>;
+}
+return (
+  <div>The variable x is {indicator}</div>
+);
+```
+
+### Iteration
+Pug
+```pug
+each todo in todos
+  div= todo.name
+```
+Pug-flavored Vue
+```pug
+div(v-for='todo in todos') {{todo.name}}
+```
+React
+```jsx
+{
+  todos.map(todo => <div>{todo.name}</div>)
+}
+```
+
+### Callback
+Pug
+```pug
+div(click=handleClick) Click me!
+```
+Pug-flavored Vue
+```pug
+div(@click='handleClick') Click me!
+```
+React
+```jsx
+<div onClick={handleClick}>Click me!</div>
+```
