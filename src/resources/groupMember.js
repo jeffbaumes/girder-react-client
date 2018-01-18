@@ -4,6 +4,7 @@ import { Form } from 'semantic-ui-react';
 import bindProps from '../bindProps';
 import ResourceItem from '../components/ResourceItem';
 import EditResourceContainer from '../containers/EditResourceContainer';
+import UserSelection from '../components/UserSelection';
 import { resourceFromModel } from './resource';
 
 export const fromModel = groupMember => (
@@ -56,6 +57,7 @@ export const createAction = bindProps(EditResourceContainer, {
   type,
   formInputs: ({ onChange }) => (
     <div>
+      <UserSelection label='User' name='user' multiple onChange={onChange} />
       <Form.Input label='User ID' name='userId' onChange={onChange} />
       <Form.Input label='Access level' name='level' onChange={onChange} />
       <Form.Input label='Direct add' name='force' onChange={onChange} />
