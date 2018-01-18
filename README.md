@@ -198,9 +198,9 @@ npm start
 See the [table-view](plugins/table-view) plugin for an example
 of how to use plugin endpoints.
 
-## Templating: Pug vs. Vuew vs. React
+## Templating: Pug vs. Vue vs. React
 
-Girder uses Pug as its templating engine. Here is a compilation of normal constructs in Pug along with React and Vue equivalents.
+Girder uses Pug as its templating engine. Here is a compilation of normal constructs in Pug along with Vue and React equivalents.
 
 ### Accessing a variable in inner text
 
@@ -217,7 +217,7 @@ React
 <div>{a}</div>
 ```
 
-### Accessing a variable in property
+### Accessing a variable in a property
 Pug
 ```pug
 div(class=a)
