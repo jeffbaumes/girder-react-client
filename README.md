@@ -200,7 +200,36 @@ of how to use plugin endpoints.
 
 ## Templating: Pug vs. Vue vs. React
 
-Girder uses Pug as its templating engine. Here is a compilation of normal constructs in Pug along with Vue and React equivalents.
+Girder uses Pug as its templating engine. Here is a compilation of common
+constructs in Pug along with Vue and React equivalents.
+
+It's worth noting that these are three very different frameworks:
+
+Of course the major difference is that Pug is a standard render-once template,
+while Vue and React are reactive to enable intelligent updates.
+
+Pug mixes simple scripting with HTML tags. Vue templates are "just HTML" with special
+indicators that are interpreted by the Vue runtime. React is "just JavaScript" with
+the optional JSX interpreter able to convert inline HTML tags into JavaScript calls
+to create elements. For example, this JSX code
+
+```jsx
+<div className="red">Children Text</div>;
+```
+
+is translated to this (you could always do this directly instead):
+
+```js
+React.createElement("div", { className: "red" }, "Children Text");
+```
+
+Since Vue templates are "just HTML", it is more straightforward to use an engine like
+Pug to generate the HTML, although you would not normally use any of the scripting
+features of Pug, instead using the special Vue constructs. Pug preprocessing for Vue
+is explicitly mentioned as being supported in the official Vue docs.
+
+However, mixing Pug with React seems both less advantagous and less supported, so
+the React examples here are plain React with JSX.
 
 ### Accessing a variable in inner text
 
